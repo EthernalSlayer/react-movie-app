@@ -6,7 +6,7 @@ class FormMovie extends React.Component {
     super(props);
     this.state = {
       title: '',
-      url: '',
+      poster: '',
       comment: '',
     };
   }
@@ -19,6 +19,17 @@ class FormMovie extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const url = 'https://post-a-form.herokuapp.com/api/movies/';
+    axios
+      .post(url, this.state)
+      .then((response) => response.data)
+      .then((response) => {
+        alert(`Le film a été ajouté avec l'ID ${response.id} !`);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert(`Erreur lors de l'ajout du film: ${error.message}`);
+      });
   };
 
   render() {
@@ -41,13 +52,13 @@ class FormMovie extends React.Component {
             </div>
 
             <div className="form-data">
-              <label htmlFor="url">Poster</label>
+              <label htmlFor="poster">Poster</label>
               <input
                 type="text"
-                id="url"
-                name="url"
+                id="poster"
+                name="poster"
                 onChange={this.handleChange}
-                value={this.state.url}
+                value={this.state.poster}
               />
             </div>
 
@@ -59,6 +70,10 @@ class FormMovie extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.comment}
               />
+            </div>
+            <hr />
+            <div className="form-data">
+              <input type="submit" value="Envoyer" />
             </div>
           </fieldset>
         </form>
