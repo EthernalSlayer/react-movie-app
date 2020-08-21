@@ -17,12 +17,16 @@ class FormMovie extends React.Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   render() {
     return (
       <div className="FormMovie">
         <h1>Saisie d'un film</h1>
 
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <fieldset>
             <legend>Informations</legend>
             <div className="form-data">
