@@ -12,7 +12,9 @@ class FormMovie extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e);
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
 
   render() {
